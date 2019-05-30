@@ -12,8 +12,8 @@ variable "bootstrap_count" {
   type = "string"
 }
 
-variable "bootstrap_ips" {
-  type = "list"
+variable "bootstrap_ip" {
+  type = "string"
 }
 
 variable "control_plane_count" {

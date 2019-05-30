@@ -1,0 +1,16 @@
+apiVersion: v1beta4
+baseDomain: example.com
+metadata:
+  name: mycluster
+compute:
+- name: worker
+  replicas: 3
+controlPlane:
+  name: master
+  replicas: 3
+platform:
+  none: {}
+pullSecret: >
+  PASTE PULL SECRET HERE
+sshKey: |
+  PASTE SSH PUBLIC KEY HERE

@@ -1,7 +1,7 @@
 PODMAN=podman
 MOUNT_FLAGS=
 
-TERRAFORM_IMAGE=hashicorp/terraform:0.12.0
+TERRAFORM_IMAGE=hashicorp/terraform:0.11.14
 PODMAN_TF=${PODMAN} run --privileged --rm \
 	--user $(shell id -u):$(shell id -u) \
 	--workdir=/tf \

@@ -28,8 +28,6 @@ ifeq (,$(wildcard ./terraform/terraform.tfvars))
 	$(error "See terraform/terraform.tfvars.example and create terraform/terraform.tfvars")
 endif
 
-terraform: check init plan apply
-
 cleanup: ## Remove remaining installer bits
 	rm -rf clusters/${CLUSTER} || true
 
@@ -40,14 +38,8 @@ endif
 	${PODMAN_INSTALLER} version
 	${PODMAN_INSTALLER} create ignition-configs --dir /output
 
-init: ## Initialize terraform
+terraform: check ## Initialize terraform
 	${PODMAN_TF} init
-
-plan: ## Plan terraform install
-	${PODMAN_TF} apply -auto-approve
-
-apply: ## Apply terraform install
-	${PODMAN_TF} apply -auto-approve
-
-destroy: ## Destroy created resources
-	${PODMAN_TF} destroy -auto-approve
+	${PODMAN_INSTALLER} wait-for bootstrap-complete --dir /output
+	${PODMAN_TF} apply -auto-approve -var 'bootstrap_complete=true'
+	${PODMAN_INSTALLER} wait-for install-complete --dir /output

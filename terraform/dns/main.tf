@@ -1,7 +1,3 @@
-data "digitalocean_domain" "base" {
-  name = "${var.base_domain}"
-}
-
 resource "digitalocean_domain" "cluster" {
   name = "${var.cluster_domain}"
 }

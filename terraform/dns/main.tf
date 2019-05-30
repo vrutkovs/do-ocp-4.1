@@ -12,6 +12,7 @@ resource "digitalocean_record" "api-external-bootstrap" {
 }
 
 resource "digitalocean_record" "api-external" {
+  count = "${var.control_plane_count}"
   domain = "${var.cluster_domain}"
   type   = "A"
   ttl    = "60"
@@ -31,6 +32,7 @@ resource "digitalocean_record" "api-internal-bootstrap" {
 }
 
 resource "digitalocean_record" "api-internal" {
+  count = "${var.control_plane_count}"
   domain = "${var.cluster_domain}"
   type   = "A"
   ttl    = "60"

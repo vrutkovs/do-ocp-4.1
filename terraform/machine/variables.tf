@@ -16,46 +16,22 @@ variable "ignition_url" {
   default = ""
 }
 
-variable "resource_pool_id" {
-  type = "string"
+variable "region" {
+  type    = "string"
+  default = ""
 }
 
-variable "folder" {
-  type = "string"
+variable "image" {
+  type    = "string"
+  default = ""
 }
 
-variable "datastore" {
-  type = "string"
+variable "size" {
+  type    = "string"
+  default = ""
 }
 
-variable "network" {
-  type = "string"
-}
-
-variable "cluster_domain" {
-  type = "string"
-}
-
-variable "datacenter_id" {
-  type = "string"
-}
-
-variable "template" {
-  type = "string"
-}
-
-variable "machine_cidr" {
-  type = "string"
-}
-
-variable "ipam" {
-  type = "string"
-}
-
-variable "ipam_token" {
-  type = "string"
-}
-
-variable "ip_addresses" {
-  type = "list"
+variable "ssh_key" {
+  type    = "string"
+  default = ""
 }

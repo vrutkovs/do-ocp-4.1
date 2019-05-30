@@ -40,6 +40,7 @@ endif
 
 terraform: check ## Initialize terraform
 	${PODMAN_TF} init
+	${PODMAN_TF} apply -auto-approve
 	${PODMAN_INSTALLER} wait-for bootstrap-complete --dir /output
 	${PODMAN_TF} apply -auto-approve -var 'bootstrap_complete=true'
 	${PODMAN_INSTALLER} wait-for install-complete --dir /output

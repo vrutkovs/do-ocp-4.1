@@ -10,15 +10,14 @@ base_domain = "example.com"
 // Name of the Digital Ocean project
 do_project = "devel"
 
-// Name of the VM template to clone to create VMs for the cluster. The dev cluster has a template named "rhcos-latest".
+// DigitalOcean private image name
 do_image = "rhcos-latest"
 
 // Name of the DO region
 do_region = "fra1"
 
-// The machine_cidr where IP addresses will be assigned for cluster nodes.
-// Additionally, IPAM will assign IPs based on the network ID.
-machine_cidr = "10.0.0.0/24"
+// Name of the SSH Key uploaded to DO. Note, that its useless, but required to create VMs
+do_ssh_key = "my-do-ssh-key"
 
 // The number of control plane VMs to create. Default is 3.
 control_plane_count = 3

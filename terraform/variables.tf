@@ -17,6 +17,11 @@ variable "do_region" {
   description = "Digital Ocean region"
 }
 
+variable "do_ssh_key" {
+  type        = "string"
+  description = "Digital Ocean ssh key name"
+}
+
 /////////
 // OpenShift cluster variables
 /////////
@@ -36,10 +41,6 @@ variable "cluster_domain" {
   description = "The base DNS zone to add the sub zone to."
 }
 
-variable "machine_cidr" {
-  type = "string"
-}
-
 /////////
 // Bootstrap machine variables
 /////////
@@ -51,11 +52,6 @@ variable "bootstrap_complete" {
 
 variable "bootstrap_ignition_url" {
   type = "string"
-}
-
-variable "bootstrap_ip" {
-  type    = "string"
-  default = ""
 }
 
 ///////////
@@ -71,11 +67,6 @@ variable "control_plane_ignition" {
   type = "string"
 }
 
-variable "control_plane_ips" {
-  type    = "list"
-  default = []
-}
-
 //////////
 // Compute machine variables
 //////////
@@ -87,9 +78,4 @@ variable "compute_count" {
 
 variable "compute_ignition" {
   type = "string"
-}
-
-variable "compute_ips" {
-  type    = "list"
-  default = []
 }

@@ -36,6 +36,7 @@ ifeq (,$(wildcard ./installer/install-config.yaml))
 	$(error "See installer/install-config.yaml.example and create installer/install-config.yaml")
 endif
 	${PODMAN_INSTALLER} version
+	cp installer/install-config.yaml{,.backup}
 	${PODMAN_INSTALLER} create ignition-configs --dir /output
 
 terraform: check ## Initialize terraform

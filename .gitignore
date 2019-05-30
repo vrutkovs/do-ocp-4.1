@@ -1,2 +1,4 @@
 secrets.env
-.terraform.d
+terraform/.terraform.d
+terraform/.terraform
+terraform/terraform.tfvars

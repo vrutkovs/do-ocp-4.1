@@ -16,7 +16,6 @@ PODMAN_INSTALLER=${PODMAN} run --privileged --rm \
 	-ti ${INSTALLER_IMAGE}
 
 all: help
-install: check ignition init plan apply ## Start install from scratch
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -25,17 +24,19 @@ check: ## Verify all necessary files exist
 ifeq (,$(wildcard ./secrets.env))
 	$(error "See secrets.env.example and create secrets.env")
 endif
-ifeq (,$(wildcard ./installer/install-config.yaml))
-	$(error "See installer/install-config.yaml.example and create installer/install-config.yaml")
-endif
 ifeq (,$(wildcard ./terraform/terraform.tfvars))
 	$(error "See terraform/terraform.tfvars.example and create terraform/terraform.tfvars")
 endif
 
+terraform: check init plan apply
+
 cleanup: ## Remove remaining installer bits
 	rm -rf clusters/${CLUSTER} || true
 
-ignition: ## Generate ignition files
+ignition: check ## Generate ignition files
+ifeq (,$(wildcard ./installer/install-config.yaml))
+	$(error "See installer/install-config.yaml.example and create installer/install-config.yaml")
+endif
 	${PODMAN_INSTALLER} version
 	${PODMAN_INSTALLER} create ignition-configs --dir /output
 

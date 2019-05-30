@@ -39,7 +39,6 @@ module "compute" {
 module "dns" {
   source = "./dns"
 
-  base_domain         = "${var.base_domain}"
   cluster_domain      = "${var.cluster_domain}"
   bootstrap_count     = "${var.bootstrap_complete ? 0 : 1}"
   bootstrap_ip        = "${element(module.bootstrap.ip_addresses, 0)}"

@@ -4,9 +4,6 @@ cluster_id = "mycluster"
 // Domain of the cluster. This should be "${cluster_id}.${base_domain}".
 cluster_domain = "mycluster.example.com"
 
-// Base domain from which the cluster domain is a subdomain.
-base_domain = "example.com"
-
 // Name of the Digital Ocean project
 do_project = "devel"
 

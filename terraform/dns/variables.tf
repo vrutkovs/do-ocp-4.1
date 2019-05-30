@@ -3,11 +3,6 @@ variable "cluster_domain" {
   type        = "string"
 }
 
-variable "base_domain" {
-  description = "The base domain used for public records."
-  type        = "string"
-}
-
 variable "bootstrap_count" {
   type = "string"
 }

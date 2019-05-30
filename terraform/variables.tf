@@ -31,11 +31,6 @@ variable "cluster_id" {
   description = "This cluster id must be of max length 27 and must have only alphanumeric or hyphen characters."
 }
 
-variable "base_domain" {
-  type        = "string"
-  description = "The base DNS zone to add the sub zone to."
-}
-
 variable "cluster_domain" {
   type        = "string"
   description = "The base DNS zone to add the sub zone to."

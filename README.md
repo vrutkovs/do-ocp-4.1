@@ -8,8 +8,7 @@ Preparing RHCOS image
 * ```
 curl -kLvs --compressed -o /var/lib/libvirt/images/rhcos-openstack.qcow2 \
    https://d26v6vn1y7q7fv.cloudfront.net/releases/ootpa/${VERSION}/rhcos-${VERSION}-openstack.qcow2
-git clone -b rhcos-4.1 https://github.com/coreos/coreos-assembler
-./coreos-assembler/src/gf-platformid \
+./cosa/gf-platformid \
    /var/lib/libvirt/images/rhcos-openstack.qcow2 \
    /var/lib/libvirt/images/rhcos-do.qcow2 digitalocean```
 

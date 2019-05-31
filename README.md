@@ -14,7 +14,7 @@ Installing OpenShift v4
 * Edit `installer/install-config.yaml`
 * Run `make ignition`
 * `cp terraform/terraform.tfvars{.example,}`
-* Upload `installer/bootstrap.ign` to some http pastebin (`cat installer/bootstrap.ign | curl -F 'sprunge=<-' http://sprunge.us`)
+* Upload `installer/bootstrap.ign` to DO Spaces or some http pastebin (`cat installer/bootstrap.ign | curl -F 'sprunge=<-' http://sprunge.us`)
 * Update `terraform/terraform.tfvars`
 * `cp secrets.env{.example,}`, fill in DO token in `secrets.env`
 * Run `make terraform`. Run `make destroy` to remove droplets and machines

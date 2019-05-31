@@ -9,7 +9,7 @@ Preparing RHCOS image
 
 * `git clone https://github.com/coreos/coreos-assembler && ./coreos-assembler/src/gf-platformid /var/lib/libvirt/images/rhcos-openstack.qcow2 /var/lib/libvirt/images/rhcos-do.qcow2 digitalocean`
 
-* Upload `rhcos-do.qcow2` to DO
+* Upload `/var/lib/libvirt/images/rhcos-do.qcow2` to DO
 
 Installing OpenShift v4
 ====

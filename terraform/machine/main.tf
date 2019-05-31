@@ -12,7 +12,7 @@ resource "digitalocean_droplet" "vm" {
   size      = "${var.size}"
   region    = "${var.region}"
   image     = "${data.digitalocean_image.rhcos.id}"
-  user_data = "${base64encode(data.ignition_config.ign.*.rendered[count.index])}"
+  user_data = "${data.ignition_config.ign.*.rendered[count.index]}"
   ssh_keys  = ["${data.digitalocean_ssh_key.key.id}"]
 }
 

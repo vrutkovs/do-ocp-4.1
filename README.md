@@ -6,6 +6,8 @@ Preparing RHCOS image
 * Run `make prepare-rhcos`
 * Upload `/var/lib/libvirt/images/rhcos-do.qcow2` to DO
 
+If you don't feel adventurous upload https://rhcos.fra1.digitaloceanspaces.com/rhcos-do.qcow2
+
 Installing OpenShift v4
 ====
 * `cp installer/install-config.yaml{.example,}`

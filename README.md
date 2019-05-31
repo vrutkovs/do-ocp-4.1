@@ -3,15 +3,7 @@ Preparing RHCOS image
 * Open "https://releases-rhcos.svc.ci.openshift.org/storage/releases/ootpa/builds.json"
 * Find the latest RHCOS version listed there, save it to "VERSION" env var
 
-* Make sure you don't use RHEL7 - it can't mount RHEL8 xfs partition
-* `yum install -y libguestfs-xfs libguestfs-tools-c`
-* ```
-curl -kLvs --compressed -o /var/lib/libvirt/images/rhcos-openstack.qcow2 \
-   https://d26v6vn1y7q7fv.cloudfront.net/releases/ootpa/${VERSION}/rhcos-${VERSION}-openstack.qcow2
-./cosa/gf-platformid \
-   /var/lib/libvirt/images/rhcos-openstack.qcow2 \
-   /var/lib/libvirt/images/rhcos-do.qcow2 digitalocean```
-
+* Run `make prepare-rhcos`
 * Upload `/var/lib/libvirt/images/rhcos-do.qcow2` to DO
 
 Installing OpenShift v4

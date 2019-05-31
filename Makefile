@@ -15,10 +15,21 @@ PODMAN_INSTALLER=${PODMAN} run --privileged --rm \
 	--user $(shell id -u):$(shell id -u) \
 	-ti ${INSTALLER_IMAGE}
 
+RHCOS_VERSION=420.8.20190530.0
+
 all: help
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+prepare-rhcos: ## Generate DO-compatible image
+	yum install -y libguestfs-xfs libguestfs-tools-c
+	curl -kLvs --compressed \
+	   -o /var/lib/libvirt/images/rhcos-openstack.qcow2 \
+	   "https://d26v6vn1y7q7fv.cloudfront.net/releases/ootpa/${RHCOS_VERSION}/rhcos-${RHCOS_VERSION}-openstack.qcow2"
+	./cosa/gf-platformid \
+	   /var/lib/libvirt/images/rhcos-openstack.qcow2 \
+	   /var/lib/libvirt/images/rhcos-do.qcow2
 
 check: ## Verify all necessary files exist
 ifeq (,$(wildcard ./secrets.env))

@@ -16,7 +16,7 @@ dn=$(dirname "$0")
 
 src="$1"
 dest="$2"
-platformid="$3"
+platformid="digitalocean"
 
 if [[ $src == *.gz ]]; then
     img="$(basename "$src")"
@@ -61,6 +61,8 @@ coreos_gf download "${blscfg_path}" "${tmpd}"/bls.conf
 sed -i -e 's, ignition.platform.id=[a-zA-Z0-9]*,,g' "${tmpd}"/bls.conf
 sed -i -e 's,^\(options .*\),\1 ignition.platform.id='"${platformid}"',' "${tmpd}"/bls.conf
 coreos_gf upload "${tmpd}"/bls.conf "${blscfg_path}"
+
+coreos_gf upload "${dn}/coreos-digitalocean-network.service" "${tmpd}"/systemd/system
 
 coreos_gf_shutdown
 

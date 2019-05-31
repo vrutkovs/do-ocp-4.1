@@ -37,7 +37,7 @@ resource "digitalocean_record" "api-internal" {
   type   = "A"
   ttl    = "60"
   name   = "api-int"
-  value  = "${element(var.control_plane_ips, count.index)}"
+  value  = "${element(var.internal_control_plane_ips, count.index)}"
   weight = 90
 }
 
@@ -48,7 +48,7 @@ resource "digitalocean_record" "etcd_a_nodes" {
   type   = "A"
   ttl    = "60"
   name   = "etcd-${count.index}"
-  value  = "${element(var.control_plane_ips, count.index)}"
+  value  = "${element(var.internal_control_plane_ips, count.index)}"
 }
 
 resource "digitalocean_record" "etcd_cluster" {

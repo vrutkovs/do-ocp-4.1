@@ -11,11 +11,19 @@ variable "bootstrap_ip" {
   type = "string"
 }
 
+variable "internal_bootstrap_ip" {
+  type = "string"
+}
+
 variable "control_plane_count" {
   type = "string"
 }
 
 variable "control_plane_ips" {
+  type = "list"
+}
+
+variable "internal_control_plane_ips" {
   type = "list"
 }
 

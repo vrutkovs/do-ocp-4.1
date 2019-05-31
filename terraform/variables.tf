@@ -2,11 +2,6 @@
 // Digital Ocean variables
 //////
 
-variable "do_project" {
-  type        = "string"
-  description = "This is the name of the Digital Ocean project."
-}
-
 variable "do_image" {
   type        = "string"
   description = "Name of the uploaded RHCOS image."

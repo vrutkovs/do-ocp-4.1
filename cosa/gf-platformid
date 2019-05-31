@@ -70,7 +70,9 @@ sed -i -e 's, ignition.platform.id=[a-zA-Z0-9]*,,g' "${tmpd}"/bls.conf
 sed -i -e 's,^\(options .*\),\1 ignition.platform.id='"${platformid}"',' "${tmpd}"/bls.conf
 coreos_gf upload "${tmpd}"/bls.conf "${blscfg_path}"
 
-coreos_gf upload "${dn}/coreos-digitalocean-network.service" "${tmpd}"/systemd/system
+# Inject DO network service
+deploy_dir=$(coreos_gf glob-expand /ostree/deploy/rhcos/deploy/* | tail -n1)
+coreos_gf upload "${dn}/coreos-digitalocean-network.service" "${deploy_dir}etc/systemd/system/coreos-digitalocean-network.service"
 
 coreos_gf_shutdown
 

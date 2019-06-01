@@ -10,9 +10,17 @@ PODMAN_TF=${PODMAN} run --privileged --rm \
 	-ti ${TERRAFORM_IMAGE}
 
 INSTALLER_IMAGE=quay.io/openshift/origin-installer:4.1
+INSTALLER_LOG_LEVEL=info
+#INSTALLER_IMAGE=quay.io/origin/4.1:installer
+#RELEASE_IMAGE=quay.io/origin/release:4.1
+ifneq ("$(RELEASE_IMAGE)","")
+	INSTALLER_PARAMS=-e OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE}
+endif
+
 PODMAN_INSTALLER=${PODMAN} run --privileged --rm \
 	-v $(shell pwd)/installer:/output${MOUNT_FLAGS} \
 	--user $(shell id -u):$(shell id -u) \
+	${INSTALLER_PARAMS} \
 	-ti ${INSTALLER_IMAGE}
 
 RHCOS_VERSION=420.8.20190530.0
@@ -49,7 +57,7 @@ endif
 	${PODMAN} pull ${INSTALLER_IMAGE}
 	${PODMAN_INSTALLER} version
 	cp installer/install-config.yaml{,.backup}
-	${PODMAN_INSTALLER} create ignition-configs --dir /output
+	${PODMAN_INSTALLER} create ignition-configs --dir /output --log-level ${INSTALLER_LOG_LEVEL}
 
 terraform: check ## Initialize terraform
 	${PODMAN_TF} init

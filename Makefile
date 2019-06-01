@@ -9,7 +9,7 @@ PODMAN_TF=${PODMAN} run --privileged --rm \
 	--env-file $(shell pwd)/secrets.env \
 	-ti ${TERRAFORM_IMAGE}
 
-INSTALLER_IMAGE=registry.svc.ci.openshift.org/origin/4.2:installer
+INSTALLER_IMAGE=quay.io/openshift/origin-installer:4.1
 PODMAN_INSTALLER=${PODMAN} run --privileged --rm \
 	-v $(shell pwd)/installer:/output${MOUNT_FLAGS} \
 	--user $(shell id -u):$(shell id -u) \

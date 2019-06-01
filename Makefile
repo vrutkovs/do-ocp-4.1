@@ -47,10 +47,13 @@ ifeq (,$(wildcard ./terraform/terraform.tfvars))
 	$(error "See terraform/terraform.tfvars.example and create terraform/terraform.tfvars")
 endif
 
-cleanup: ## Remove remaining installer bits
-	rm -rf clusters/${CLUSTER} || true
+installer-cleanup: ## Remove remaining installer bits
+	sudo rm -rf installer/*.ign || true
+	sudo rm -rf installer/auth || true
+	sudo rm -rf installer/.openshift* || true
+	sudo rm -rf installer/metadata || true
 
-ignition: check ## Generate ignition files
+ignition: check installer-cleanup ## Generate ignition files
 ifeq (,$(wildcard ./installer/install-config.yaml))
 	$(error "See installer/install-config.yaml.example and create installer/install-config.yaml")
 endif

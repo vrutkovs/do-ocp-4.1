@@ -57,7 +57,7 @@ resource "digitalocean_record" "etcd_cluster" {
   type     = "SRV"
   ttl      = "60"
   name     = "_etcd-server-ssl._tcp"
-  value    = "${element(digitalocean_record.etcd_a_nodes.*.fqdn, count.index)}"
+  value    = "${element(split(".", element(digitalocean_record.etcd_a_nodes.*.fqdn, count.index)),0)}"
   priority = "0"
   weight   = "10"
   port     = "2380"

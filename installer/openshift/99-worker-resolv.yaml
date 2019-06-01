@@ -1,0 +1,19 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  generation: 1
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 00-worker-resolv-conf
+spec:
+  config:
+    ignition:
+      version: 2.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,bmFtZXNlcnZlciA4LjguOC44Cg==
+          verification: {}
+        filesystem: root
+        mode: 0664
+        path: /etc/resolv.conf

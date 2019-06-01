@@ -10,6 +10,7 @@ If you don't feel adventurous upload https://rhcos.fra1.digitaloceanspaces.com/r
 
 Installing OpenShift v4
 ====
+* Get your pull secret at https://try.openshift.com
 * `cp installer/install-config.yaml{.example,}`
 * Edit `installer/install-config.yaml`
 * Run `make ignition`

@@ -7,8 +7,9 @@ resource "digitalocean_record" "api-external-bootstrap" {
   type   = "A"
   ttl    = "60"
   name   = "api"
-  value  = "${var.bootstrap_ip}"
+  value  = "${element(var.bootstrap_ips, count.index)}"
   weight = 90
+  count  = "${var.bootstrap_count}"
 }
 
 resource "digitalocean_record" "api-external" {
@@ -27,8 +28,9 @@ resource "digitalocean_record" "api-internal-bootstrap" {
   type   = "A"
   ttl    = "60"
   name   = "api-int"
-  value  = "${var.bootstrap_ip}"
+  value  = "${element(var.bootstrap_ips, count.index)}"
   weight = 90
+  count  = "${var.bootstrap_count}"
 }
 
 resource "digitalocean_record" "api-internal" {

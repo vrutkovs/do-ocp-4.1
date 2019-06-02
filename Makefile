@@ -6,6 +6,7 @@ PODMAN_TF=${PODMAN} run --privileged --rm \
 	--user $(shell id -u):$(shell id -u) \
 	--workdir=/tf \
 	-v $(shell pwd)/terraform:/tf${MOUNT_FLAGS} \
+	-v $(shell pwd)/installer:/installer${MOUNT_FLAGS} \
 	--env-file $(shell pwd)/secrets.env \
 	-ti ${TERRAFORM_IMAGE}
 
@@ -61,6 +62,7 @@ endif
 	${PODMAN_INSTALLER} version
 	cp installer/install-config.yaml{,.backup}
 	${PODMAN_INSTALLER} create ignition-configs --dir /output --log-level ${INSTALLER_LOG_LEVEL}
+	echo "Please upload installer/bootstrap.ign and run `make terraform`"
 
 terraform: check ## Initialize terraform
 	${PODMAN_TF} init

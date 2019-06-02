@@ -45,7 +45,7 @@ variable "bootstrap_ignition_url" {
 }
 
 ///////////
-// Control Plane machine variables
+// Machine variables
 ///////////
 
 variable "control_plane_count" {
@@ -53,19 +53,7 @@ variable "control_plane_count" {
   default = "3"
 }
 
-variable "control_plane_ignition" {
-  type = "string"
-}
-
-//////////
-// Compute machine variables
-//////////
-
 variable "compute_count" {
   type    = "string"
   default = "3"
-}
-
-variable "compute_ignition" {
-  type = "string"
 }

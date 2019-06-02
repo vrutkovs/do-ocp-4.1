@@ -17,7 +17,7 @@ module "control_plane" {
 
   name           = "control-plane"
   instance_count = "${var.control_plane_count}"
-  ignition       = "${var.control_plane_ignition}"
+  ignition       = "${file("/installer/master.ign")}"
   region         = "${var.do_region}"
   image          = "${var.do_image}"
   ssh_key        = "${var.do_ssh_key}"
@@ -29,7 +29,7 @@ module "compute" {
 
   name           = "compute"
   instance_count = "${var.compute_count}"
-  ignition       = "${var.compute_ignition}"
+  ignition       = "${file("/installer/worker.ign")}"
   region         = "${var.do_region}"
   image          = "${var.do_image}"
   ssh_key        = "${var.do_ssh_key}"

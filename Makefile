@@ -51,7 +51,7 @@ installer-cleanup: ## Remove remaining installer bits
 	sudo rm -rf installer/*.ign || true
 	sudo rm -rf installer/auth || true
 	sudo rm -rf installer/.openshift* || true
-	sudo rm -rf installer/metadata || true
+	sudo rm -rf installer/metadata.json || true
 
 ignition: check installer-cleanup ## Generate ignition files
 ifeq (,$(wildcard ./installer/install-config.yaml))

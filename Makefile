@@ -55,14 +55,14 @@ installer-cleanup: ## Remove remaining installer bits
 	sudo rm -rf installer/metadata.json || true
 
 ignition: check installer-cleanup ## Generate ignition files
-ifeq (,$(wildcard ./installer/install-config.yaml))
+ifeq (,$(wildcard ./install-config.yaml))
 	$(error "See installer/install-config.yaml.example and create installer/install-config.yaml")
 endif
 	${PODMAN} pull ${INSTALLER_IMAGE}
 	${PODMAN_INSTALLER} version
-	cp installer/install-config.yaml{,.backup}
+	cp install-config.yaml installer/
 	${PODMAN_INSTALLER} create ignition-configs --dir /output --log-level ${INSTALLER_LOG_LEVEL}
-	echo "Please upload installer/bootstrap.ign and run `make terraform`"
+	echo "Please upload installer/bootstrap.ign and run 'make terraform'"
 
 terraform: check ## Initialize terraform
 	${PODMAN_TF} init

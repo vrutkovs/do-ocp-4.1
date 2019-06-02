@@ -21,7 +21,7 @@ module "control_plane" {
   region         = "${var.do_region}"
   image          = "${var.do_image}"
   ssh_key        = "${var.do_ssh_key}"
-  size           = "s-4vcpu-8gb"
+  size           = "s-6vcpu-16gb"
 }
 
 module "compute" {
@@ -33,7 +33,7 @@ module "compute" {
   region         = "${var.do_region}"
   image          = "${var.do_image}"
   ssh_key        = "${var.do_ssh_key}"
-  size           = "s-4vcpu-8gb"
+  size           = "s-6vcpu-16gb"
 }
 
 module "dns" {

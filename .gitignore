@@ -3,4 +3,5 @@ terraform/.terraform*
 terraform/terraform.tfvars
 terraform/terraform.tfstate*
 installer/
+!installer/openshift
 install-config.yaml

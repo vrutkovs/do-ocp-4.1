@@ -13,6 +13,17 @@ data "ignition_file" "hostname" {
   mode = "0644"
 }
 
+data "ignition_file" "resolv" {
+  count = "${var.instance_count}"
+
+  filesystem = "root"
+  path = "/etc/resolv.conf"
+  content {
+    content = "nameserver 1.1.1.1"
+  }
+  mode = "0644"
+}
+
 data "ignition_config" "ign" {
   count = "${var.instance_count}"
 
@@ -20,5 +31,8 @@ data "ignition_config" "ign" {
     source = "${var.ignition_url != "" ? var.ignition_url : local.ignition_encoded}"
   }
 
-  files = ["${data.ignition_file.hostname.*.id[count.index]}"]
+  files = [
+    "${data.ignition_file.hostname.*.id[count.index]}",
+    "${data.ignition_file.resolv.*.id[count.index]}"
+  ]
 }

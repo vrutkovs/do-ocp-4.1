@@ -1,7 +1,7 @@
 Preparing FCOS image
 ====
 * Open "https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json"
-* Find the latest FCOS version listed there, save it to "FCOS_VERSION" env var
+* Find the latest FCOS version listed there, save it to "FCOS_VERSION" env var (can be obtained via `curl -sSL https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json | jq -r '.builds[0].id'`)
 
 * Run `make prepare-fcos`
 * Upload `/var/lib/libvirt/images/fcos-do.qcow2` to DO

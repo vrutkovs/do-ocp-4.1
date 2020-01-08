@@ -63,6 +63,8 @@ endif
 	${PODMAN} pull ${INSTALLER_IMAGE}
 	${PODMAN_INSTALLER} version
 	cp install-config.yaml installer/
+	cp ignition.json installer/
+	cp crio.conf installer/
 	${PODMAN_INSTALLER} create ignition-configs --dir /output --log-level ${INSTALLER_LOG_LEVEL}
 	echo "Please upload installer/bootstrap.ign and run 'make terraform'"
 

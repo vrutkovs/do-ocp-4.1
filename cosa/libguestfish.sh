@@ -59,8 +59,8 @@ coreos_gf_run_mount() {
     # As far as I can tell libguestfs doesn't have a "find partition by GPT type" API,
     # let's hack this and assume it's the first if present.
     EFI_SYSTEM_PARTITION_GUID="C12A7328-F81F-11D2-BA4B-00A0C93EC93B"
-    if [ "$(coreos_gf part-get-gpt-type /dev/sda 1)" = "${EFI_SYSTEM_PARTITION_GUID}" ]; then
-        coreos_gf mount /dev/sda1 /boot/efi
+    if [ "$(coreos_gf part-get-gpt-type /dev/sda 2)" = "${EFI_SYSTEM_PARTITION_GUID}" ]; then
+        coreos_gf mount /dev/sda2 /boot/efi
     fi
 
     # Export these variables for further use

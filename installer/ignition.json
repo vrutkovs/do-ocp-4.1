@@ -1,0 +1,52 @@
+{
+  "ignition": {
+    "config": {
+      "merge": [
+        {
+          "source": "${ignition_url_final}"
+        }
+      ]
+    },
+    "security": {
+      "tls": {
+        "certificateAuthorities": [
+          {
+            "source": "data:text/plain;charset=utf-8;base64,LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURFRENDQWZpZ0F3SUJBZ0lJV0NGQ3NvSFNGWTh3RFFZSktvWklodmNOQVFFTEJRQXdKakVTTUJBR0ExVUUKQ3hNSmIzQmxibk5vYVdaME1SQXdEZ1lEVlFRREV3ZHliMjkwTFdOaE1CNFhEVEl3TURFd05UQTVOREUxTUZvWApEVE13TURFd01qQTVOREUxTUZvd0pqRVNNQkFHQTFVRUN4TUpiM0JsYm5Ob2FXWjBNUkF3RGdZRFZRUURFd2R5CmIyOTBMV05oTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUEyUWtRUGpRejEvZzEKeGY3QzdwVFo5cGpHbWlweWQwSC9HeERnRGJIdnVrRGN0cXY5bjJxUFQ1a2txQ09sUU13S1BKbkE3ZGVjUVNKQQpuR3FSTnZ6YzlLQXhwNDdKSW9qRUUzVnJteW9hL1VuNDh1SDg5bjZFT2JpUzc3M05aWERsOW5xQnA2c2VsZU52CnR2WVJIWCs5MXZWZFUyYlZGaTN3ZERza0Znb2hzUDg3eGNOZWF0bWVRckRIeGRBWUI5TG1KMVZod3RXeHIveTYKclZIL0owWVFObFhpNlVYWXZCVTdCZ3hWak1QaWliRkdHOTZiSzlEWk45SHlKUnBaMUdIYXliUnNsL3p1azk1TwpiMXBxK2l6OVVWamtUNm8wemt4MjZXUXh1QlRJWDR2eENUeG9KY3JYWm80bUFoVGJmdUJLSndqM2phSUVaaHdGCnB1SzZ2NGFCUndJREFRQUJvMEl3UURBT0JnTlZIUThCQWY4RUJBTUNBcVF3RHdZRFZSMFRBUUgvQkFVd0F3RUIKL3pBZEJnTlZIUTRFRmdRVVUxNldlUzV4bTdlUDJ1a25BaGNHM0hpYVJOY3dEUVlKS29aSWh2Y05BUUVMQlFBRApnZ0VCQU5XeHZ0aVJpRGhQVXVwWVdzSERqZ0U4dTB1VDJaTVhoWE9Oc1MvVGVUK21BQUVEdjdyMlBQSXQ0R1h6CnZLVmNFd0xPVUhVREVWNTFxOEE2WnExRUVWamZheUJwdW81VkhvK1I3U01LcDFZdjdtYnR1RVAzVEUzeTZhYWQKNll1UDUzalhvbTNCMXBrYnllR24yN2srV0h4VjVKL1g5SDgvYjg3YU5QdG5JSzdra1RMVmRpVWZ6T1kyVUN1ZQoyMHVsYkRkcmREU2VaQ2dRaTlXY1dyZ01BRzYwNWJoRmhqOGZLWDlMbmJKZGZodzIyTmVOWjZPYnBoM25ZUlgrCitWdklEU3hKNFp1TUtwR2xPYjNWNVArYlZRa3ozaGlJUGt6ZExoNU9Ibm9JcEVNNWJSU2tTUURicE9Jb1RJWDYKTWlwTzdWZHVvT09GZ2VrSE1hZlE2SlVZLzJvPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg=="
+          }
+        ]
+      }
+    },
+    "timeouts": {},
+    "version": "3.0.0"
+  },
+  "passwd": {},
+  "storage": {
+    "files": [
+      {
+        "group": {},
+        "overwrite": true,
+        "path": "/etc/hostname",
+        "user": {
+          "name": "root"
+        },
+        "contents": {
+          "source": "data:text/plain;charset=utf-8;base64,${etc_hostname_encoded}"
+        },
+        "mode": 420
+      },
+      {
+        "group": {},
+        "overwrite": true,
+        "path": "/etc/crio/crio.conf",
+        "user": {
+          "name": "root"
+        },
+        "contents": {
+          "source": "data:text/plain;charset=utf-8;base64,${crioconf_conf_encoded}"
+        },
+        "mode": 420
+      }
+    ]
+  },
+  "systemd": {}
+}

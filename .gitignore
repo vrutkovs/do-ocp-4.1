@@ -2,5 +2,9 @@ secrets.env
 terraform/.terraform*
 terraform/terraform.tfvars
 terraform/terraform.tfstate*
-installer/
+installer/auth
+installer/*.ign
+installer/*.json
+installer/.*
+!installer/ignition.json
 install-config.yaml

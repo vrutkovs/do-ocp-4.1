@@ -1,4 +1,4 @@
-Preparing RHCOS image
+Preparing FCOS image
 ====
 * Open "https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json"
 * Find the latest FCOS version listed there, save it to "FCOS_VERSION" env var

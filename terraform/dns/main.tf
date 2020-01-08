@@ -82,3 +82,23 @@ resource "digitalocean_record" "compute_nodes" {
   name   = "compute-${count.index}"
   value  = "${element(var.compute_ips, count.index)}"
 }
+
+resource "digitalocean_record" "apps" {
+  count = "${var.compute_count}"
+  domain = "${var.cluster_domain}"
+  type   = "A"
+  ttl    = "60"
+  name   = "apps"
+  value  = "${element(var.compute_ips, count.index)}"
+  weight = 90
+}
+
+resource "digitalocean_record" "apps_wildcard" {
+  count = "${var.compute_count}"
+  domain = "${var.cluster_domain}"
+  type   = "A"
+  ttl    = "60"
+  name   = "*.apps"
+  value  = "${element(var.compute_ips, count.index)}"
+  weight = 90
+}

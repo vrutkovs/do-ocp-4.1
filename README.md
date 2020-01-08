@@ -1,18 +1,15 @@
-Preparing RHCOS image
+Preparing FCOS image
 ====
-* Open "https://releases-rhcos.svc.ci.openshift.org/storage/releases/ootpa/builds.json"
-* Find the latest RHCOS version listed there, save it to "VERSION" env var
+* Open "https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json"
+* Find the latest FCOS version listed there, save it to "FCOS_VERSION" env var (can be obtained via `curl -sSL https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json | jq -r '.builds[0].id'`)
 
-* Run `make prepare-rhcos`
-* Upload `/var/lib/libvirt/images/rhcos-do.qcow2` to DO
+* Run `make prepare-fcos`
+* Upload `/var/lib/libvirt/images/fcos-do.qcow2` to DO
 
-If you don't feel adventurous upload https://rhcos.fra1.digitaloceanspaces.com/rhcos-do.qcow2
-
-Installing OpenShift v4
+Installing OKD v4
 ====
-* Get your pull secret at https://try.openshift.com
 * `cp install-config.yaml{.example,}`
-* Edit `install-config.yaml`
+* Edit `install-config.yaml` and use `{"auths":{"fake":{"auth": "bar"}}}` as a pull secret
 * Run `make ignition`
 * `cp terraform/terraform.tfvars{.example,}`
 * Upload `installer/bootstrap.ign` to DO Spaces or some http pastebin (`cat installer/bootstrap.ign | curl -F 'sprunge=<-' http://sprunge.us`)

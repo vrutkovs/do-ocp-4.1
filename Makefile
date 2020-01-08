@@ -10,10 +10,10 @@ PODMAN_TF=${PODMAN} run --privileged --rm \
 	--env-file $(shell pwd)/secrets.env \
 	-ti ${TERRAFORM_IMAGE}
 
-INSTALLER_IMAGE=quay.io/openshift/origin-installer:4.1
+INSTALLER_IMAGE=quay.io/openshift/origin-installer:4.3
 INSTALLER_LOG_LEVEL=info
 #INSTALLER_IMAGE=quay.io/origin/4.1:installer
-#RELEASE_IMAGE=quay.io/origin/release:4.1
+RELEASE_IMAGE=registry.svc.ci.openshift.org/ci-op-9c7973f7/release:latest
 ifneq ("$(RELEASE_IMAGE)","")
 	INSTALLER_PARAMS=-e OPENSHIFT_INSTALL_RELEASE_IMAGE_OVERRIDE=${RELEASE_IMAGE}
 endif
@@ -24,21 +24,23 @@ PODMAN_INSTALLER=${PODMAN} run --privileged --rm \
 	${INSTALLER_PARAMS} \
 	-ti ${INSTALLER_IMAGE}
 
-RHCOS_VERSION=420.8.20190530.0
+ifeq ("$(FCOS_VERSION)","")
+	# curl -sSL https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/builds.json | jq -r '.builds[0].id'
+	FCOS_VERSION=31.20191217.2.0
+endif
 
 all: help
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-prepare-rhcos: ## Generate DO-compatible image
+prepare-fcos: ## Generate DO-compatible image
 	yum install -y libguestfs-xfs libguestfs-tools-c
-	curl -kLvs --compressed \
-	   -o /var/lib/libvirt/images/rhcos-openstack.qcow2 \
-	   "https://d26v6vn1y7q7fv.cloudfront.net/releases/ootpa/${RHCOS_VERSION}/rhcos-${RHCOS_VERSION}-openstack.qcow2"
+	curl -kLvs \
+		 https://builds.coreos.fedoraproject.org/prod/streams/testing/builds/${FCOS_VERSION}/x86_64/fedora-coreos-${FCOS_VERSION}-openstack.x86_64.qcow2.xz | xz -d --stdout > /var/lib/libvirt/images/fcos-openstack.qcow2
 	./cosa/gf-platformid \
-	   /var/lib/libvirt/images/rhcos-openstack.qcow2 \
-	   /var/lib/libvirt/images/rhcos-do.qcow2
+	   /var/lib/libvirt/images/fcos-openstack.qcow2 \
+	   /var/lib/libvirt/images/fcos-do.qcow2
 
 check: ## Verify all necessary files exist
 ifeq (,$(wildcard ./secrets.env))
@@ -61,6 +63,8 @@ endif
 	${PODMAN} pull ${INSTALLER_IMAGE}
 	${PODMAN_INSTALLER} version
 	cp install-config.yaml installer/
+	cp ignition.json installer/
+	cp crio.conf installer/
 	${PODMAN_INSTALLER} create ignition-configs --dir /output --log-level ${INSTALLER_LOG_LEVEL}
 	echo "Please upload installer/bootstrap.ign and run 'make terraform'"
 
